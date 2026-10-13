@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HVAC Predictive Maintenance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+            margin: 0;
+            padding: 30px 15px;
+        }
+
+        .container {
+            max-width: 520px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px #00000015;
+        }
+
+        h1 {
+            text-align: center;
+            color: #17365d;
+        }
+
+        label {
+            display: block;
+            margin-top: 14px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            margin-top: 6px;
+            border: 1px solid #ccd3dc;
+            border-radius: 6px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 22px;
+            padding: 12px;
+            background: #1769aa;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #edf5ff;
+            border-radius: 8px;
+        }
+
+        .error {
+            color: #b00020;
+            margin-top: 15px;
+        }
+
+        .note {
+            margin-top: 20px;
+            color: #555;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>HVAC Predictive Maintenance</h1>
+    <p>Enter the equipment sensor readings.</p>
+
+    <form method="POST">
+        <label>Temperature</label>
+        <input type="number" step="any" name="temperature" required>
+
+        <label>Humidity</label>
+        <input type="number" step="any" name="humidity" required>
+
+        <label>Vibration</label>
+        <input type="number" step="any" name="vibration" required>
+
+        <label>Pressure</label>
+        <input type="number" step="any" name="pressure" required>
+
+        <label>Energy Consumption</label>
+        <input type="number" step="any" name="energy" required>
+
+        <label>Runtime Hours</label>
+        <input type="number" step="any" name="runtime" min="0.01" required>
+
+        <button type="submit">Predict Failure</button>
+    </form>
+
+    {% if prediction %}
+    <div class="result">
+        <h3>Prediction: {{ prediction }}</h3>
+        <p>Model-estimated failure probability: {{ "%.2f"|format(probability) }}%</p>
+    </div>
+    {% endif %}
+
+    {% if error %}
+    <p class="error">{{ error }}</p>
+    {% endif %}
+
+</div>
+</body>
+</html>
